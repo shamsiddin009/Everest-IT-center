@@ -228,13 +228,11 @@ const filteredCourses = computed(() => {
 
 /* Toolbar */
 .toolbar-section {
-  position: sticky;
-  top: 76px;
-  z-index: 50;
+  position: relative;
+  z-index: 10;
   padding: 16px 0;
-  background: rgba(8, 15, 26, 0.85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--color-border);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   margin-bottom: 40px;
 }
 
@@ -651,7 +649,6 @@ const filteredCourses = computed(() => {
     padding: 90px 0 28px;
   }
   .toolbar-section {
-    top: 70px;
     padding: 12px 0;
     margin-bottom: 24px;
   }
