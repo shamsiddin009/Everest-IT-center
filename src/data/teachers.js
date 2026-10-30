@@ -8,8 +8,8 @@ export const teachersData = [
     experience: '5+ yillik tajriba',
     rating: '5.0',
     studentsCount: '450+ o‘quvchi',
-    avatar: '👨‍💻',
-    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%)',
+    avatarImg: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #059669 40%, #064E3B 100%)',
     bio: 'Xalqaro loyihalarda faoliyat yuritgan tajribali Frontend arxitektori. Vue 3, React va TypeScript bo‘yicha chuqur amaliy ta’lim beradi.',
     skills: ['Vue 3', 'TypeScript', 'Vite', 'React', 'Tailwind'],
     status: 'Guruhlarga qabul ochiq'
@@ -23,8 +23,8 @@ export const teachersData = [
     experience: '6 yillik tajriba',
     rating: '4.9',
     studentsCount: '380+ o‘quvchi',
-    avatar: '🐍',
-    bannerGradient: 'linear-gradient(135deg, #059669 0%, #047857 50%, #064E3B 100%)',
+    avatarImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    bannerGradient: 'linear-gradient(135deg, #059669 0%, #047857 40%, #064E3B 100%)',
     bio: 'FinTech va e-commerce tizimlarida mikroxizmatlar arxitekturasi va Telegram botlar yaratish bo‘yicha yetakchi mutaxassis.',
     skills: ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'Docker'],
     status: 'Guruhlarga qabul ochiq'
@@ -38,8 +38,8 @@ export const teachersData = [
     experience: '4 yillik tajriba',
     rating: '5.0',
     studentsCount: '520+ o‘quvchi',
-    avatar: '👩‍🏫',
-    bannerGradient: 'linear-gradient(135deg, #0D9488 0%, #10B981 50%, #047857 100%)',
+    avatarImg: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    bannerGradient: 'linear-gradient(135deg, #0D9488 0%, #10B981 40%, #047857 100%)',
     bio: 'Cambridge CELTA xalqaro sertifikatiga ega instruktor. O‘quvchilari o‘rtacha 7.0–8.0 natijalar bilan xorijiy universitetlarga qabul qilingan.',
     skills: ['IELTS 8.5', 'CELTA', 'Speaking Fluency', 'Academic Writing'],
     status: 'Guruhlarga qabul ochiq'
@@ -53,8 +53,8 @@ export const teachersData = [
     experience: '8 yillik tajriba',
     rating: '5.0',
     studentsCount: '600+ o‘quvchi',
-    avatar: '📐',
-    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #34D399 50%, #059669 100%)',
+    avatarImg: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #34D399 40%, #059669 100%)',
     bio: 'Respublika matematika olimpiadasi g‘olibi, Prezident va ixtisoslashgan maktablarga tayyorlash bo‘yicha 200+ natijalar muallifi.',
     skills: ['Mantiqiy masalalar', 'Olimpiada', 'DTM Sinovlari', 'Mental Arifmetika'],
     status: 'Guruhlarga qabul ochiq'
