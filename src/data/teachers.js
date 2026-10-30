@@ -3,40 +3,60 @@ export const teachersData = [
     id: 1,
     name: 'Sardorbek Rahimov',
     role: 'Lead Frontend Mentor',
+    handle: '@sardor_dev',
     department: 'IT & Dasturlash',
     experience: '5+ yillik tajriba',
-    bio: 'Xalqaro loyihalarda faoliyat yuritgan tajribali Frontend arxitektori. Vue 3, React va TypeScript bo‘yicha 400+ muvaffaqiyatli shogirdlar ustozi.',
+    rating: '5.0',
+    studentsCount: '450+ o‘quvchi',
+    avatar: '👨‍💻',
+    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%)',
+    bio: 'Xalqaro loyihalarda faoliyat yuritgan tajribali Frontend arxitektori. Vue 3, React va TypeScript bo‘yicha chuqur amaliy ta’lim beradi.',
     skills: ['Vue 3', 'TypeScript', 'Vite', 'React', 'Tailwind'],
-    status: 'O‘qituvchi profili (namuna ma’lumot)'
+    status: 'Guruhlarga qabul ochiq'
   },
   {
     id: 2,
     name: 'Dilshod Normatov',
     role: 'Senior Python & Backend Developer',
+    handle: '@dilshod_backend',
     department: 'IT & Dasturlash',
     experience: '6 yillik tajriba',
-    bio: 'FinTech va e-commerce tizimlarida ma’lumotlar bazasi va mikroxizmatlar arxitekturasi bo‘yicha yetakchi mutaxassis.',
+    rating: '4.9',
+    studentsCount: '380+ o‘quvchi',
+    avatar: '🐍',
+    bannerGradient: 'linear-gradient(135deg, #059669 0%, #047857 50%, #064E3B 100%)',
+    bio: 'FinTech va e-commerce tizimlarida mikroxizmatlar arxitekturasi va Telegram botlar yaratish bo‘yicha yetakchi mutaxassis.',
     skills: ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'Docker'],
-    status: 'O‘qituvchi profili (namuna ma’lumot)'
+    status: 'Guruhlarga qabul ochiq'
   },
   {
     id: 3,
     name: 'Madina Alimova',
-    role: 'IELTS 8.5 Instructor & CELTA',
+    role: 'IELTS 8.5 & CELTA Instructor',
+    handle: '@madina_ielts',
     department: 'Ingliz Tili',
     experience: '4 yillik tajriba',
-    bio: 'Cambridge CELTA sertifikatiga ega instruktor. O‘quvchilari o‘rtacha 7.0–8.0 natijalar bilan xorijiy universitetlarga qabul qilingan.',
+    rating: '5.0',
+    studentsCount: '520+ o‘quvchi',
+    avatar: '👩‍🏫',
+    bannerGradient: 'linear-gradient(135deg, #0D9488 0%, #10B981 50%, #047857 100%)',
+    bio: 'Cambridge CELTA xalqaro sertifikatiga ega instruktor. O‘quvchilari o‘rtacha 7.0–8.0 natijalar bilan xorijiy universitetlarga qabul qilingan.',
     skills: ['IELTS 8.5', 'CELTA', 'Speaking Fluency', 'Academic Writing'],
-    status: 'O‘qituvchi profili (namuna ma’lumot)'
+    status: 'Guruhlarga qabul ochiq'
   },
   {
     id: 4,
     name: 'Farrux Tojiboyev',
     role: 'Akademik Matematika Ustasi',
+    handle: '@farrux_math',
     department: 'Matematika',
     experience: '8 yillik tajriba',
-    bio: 'Respublika olimpiadasi g‘olibi, Prezident va ixtisoslashgan maktablarga tayyorlash bo‘yicha 200+ natijalar muallifi.',
+    rating: '5.0',
+    studentsCount: '600+ o‘quvchi',
+    avatar: '📐',
+    bannerGradient: 'linear-gradient(135deg, #10B981 0%, #34D399 50%, #059669 100%)',
+    bio: 'Respublika matematika olimpiadasi g‘olibi, Prezident va ixtisoslashgan maktablarga tayyorlash bo‘yicha 200+ natijalar muallifi.',
     skills: ['Mantiqiy masalalar', 'Olimpiada', 'DTM Sinovlari', 'Mental Arifmetika'],
-    status: 'O‘qituvchi profili (namuna ma’lumot)'
+    status: 'Guruhlarga qabul ochiq'
   }
 ];

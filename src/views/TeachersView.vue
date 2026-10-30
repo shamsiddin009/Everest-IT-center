@@ -58,44 +58,82 @@ const filteredTeachers = computed(() => {
           <article
             v-for="(teacher, idx) in filteredTeachers"
             :key="teacher.id"
-            class="teacher-card glass-surface"
+            class="teacher-card navora-style-card"
             data-aos="fade-up"
             :data-aos-delay="(idx % 3) * 100"
           >
-            <!-- Card Header with Avatar & Department -->
-            <div class="teacher-card-top">
-              <div class="avatar-box">
-                <span class="avatar-initials">{{ teacher.name.split(' ').map(n => n[0]).join('') }}</span>
+            <!-- Banner Header with Decorative Grid & Social Icons -->
+            <div class="card-banner-cover" :style="{ background: teacher.bannerGradient }">
+              <div class="banner-grid-pattern"></div>
+              <div class="banner-avatar-wrap">
+                <span class="banner-avatar-icon">{{ teacher.avatar }}</span>
               </div>
-              <div class="teacher-head-info">
+              <div class="banner-social-icons">
+                <span class="social-mini-circle" title="Telegram">✈️</span>
+                <span class="social-mini-circle" title="LinkedIn">💼</span>
+                <span class="social-mini-circle" title="GitHub">💻</span>
+              </div>
+            </div>
+
+            <!-- Content Body -->
+            <div class="card-inner-body">
+              <div class="profile-header-row">
+                <div class="avatar-crest-badge">
+                  <span>{{ teacher.name.charAt(0) }}</span>
+                </div>
+                <div class="teacher-identity">
+                  <div class="name-verify-row">
+                    <h2 class="teacher-name">{{ teacher.name }}</h2>
+                    <span class="verify-badge" title="Tasdiqlangan mentor">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <span class="teacher-handle">{{ teacher.handle }}</span>
+                </div>
+
+                <button
+                  class="btn-follow-action"
+                  @click="emit('openEnroll', `${teacher.name} guruhiga yozilish`)"
+                >
+                  Yozilish
+                </button>
+              </div>
+
+              <!-- Role & Dept Tags -->
+              <div class="role-badge-row">
+                <span class="role-tag">{{ teacher.role }}</span>
                 <span class="dept-tag">{{ teacher.department }}</span>
-                <span class="exp-tag">⭐ {{ teacher.experience }}</span>
               </div>
-            </div>
 
-            <!-- Name and Role -->
-            <h2 class="teacher-name">{{ teacher.name }}</h2>
-            <p class="teacher-role">{{ teacher.role }}</p>
+              <!-- Bio Description -->
+              <p class="teacher-bio">{{ teacher.bio }}</p>
 
-            <!-- Bio -->
-            <p class="teacher-bio">{{ teacher.bio }}</p>
+              <!-- Skills wrap -->
+              <div class="skills-wrap">
+                <span v-for="(skill, i) in teacher.skills" :key="i" class="skill-pill">
+                  {{ skill }}
+                </span>
+              </div>
 
-            <!-- Skills -->
-            <div class="skills-wrap">
-              <span v-for="(skill, i) in teacher.skills" :key="i" class="skill-pill">
-                {{ skill }}
-              </span>
-            </div>
-
-            <!-- Footer Action -->
-            <div class="card-bottom">
-              <span class="status-note">{{ teacher.status }}</span>
-              <button
-                class="btn btn-secondary btn-sm"
-                @click="emit('openEnroll', `${teacher.name} guruhiga yozilish`)"
-              >
-                Ustoz bilan darsga yozilish
-              </button>
+              <!-- Metrics Strip (Like 100 Following · 50.2k Followers) -->
+              <div class="profile-metrics-strip">
+                <div class="metric-item">
+                  <strong>⭐ {{ teacher.rating }}</strong>
+                  <span>Reyting</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric-item">
+                  <strong>{{ teacher.studentsCount }}</strong>
+                  <span>Shogirdlar</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric-item">
+                  <strong>{{ teacher.experience }}</strong>
+                  <span>Tajriba</span>
+                </div>
+              </div>
             </div>
           </article>
         </div>
@@ -199,107 +237,271 @@ const filteredTeachers = computed(() => {
   gap: 28px;
 }
 
-.teacher-card {
-  display: flex;
-  flex-direction: column;
-  padding: 28px;
-  border-radius: var(--radius-xl);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+/* ═══ Navora Inspired Teacher Profile Card ═══ */
+.navora-style-card {
+  background: #081610;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease;
+  position: relative;
 }
 
-.teacher-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 245, 155, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 245, 155, 0.15);
+.navora-style-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 245, 155, 0.45);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 245, 155, 0.22);
 }
 
-.teacher-card-top {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.avatar-box {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #10B981 0%, #00F59B 100%);
+/* Banner Cover */
+.card-banner-cover {
+  position: relative;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 1.2rem;
-  color: #040907;
-  box-shadow: 0 4px 16px rgba(0, 245, 155, 0.4);
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.teacher-head-info {
+.banner-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.6;
+}
+
+.banner-avatar-wrap {
+  position: relative;
+  z-index: 2;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 3px solid rgba(255, 255, 255, 0.35);
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
 }
 
-.dept-tag {
+.navora-style-card:hover .banner-avatar-wrap {
+  transform: scale(1.08);
+}
+
+.banner-avatar-icon {
+  font-size: 2.8rem;
+}
+
+.banner-social-icons {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.social-mini-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(4, 9, 7, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-accent);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
 }
 
-.exp-tag {
-  font-size: 0.78rem;
-  color: var(--color-text-dim);
+.social-mini-circle:hover {
+  transform: scale(1.15);
+  background: #10B981;
 }
 
-.teacher-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 4px;
+/* Inner Body */
+.card-inner-body {
+  padding: 24px 24px 20px;
+  background: #06110D;
 }
 
-.teacher-role {
-  font-size: 0.88rem;
-  color: #a5b4fc;
-  font-weight: 500;
+.profile-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 14px;
 }
 
-.teacher-bio {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin-bottom: 18px;
+.avatar-crest-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #040907;
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #06110D;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+  flex-shrink: 0;
+}
+
+.teacher-identity {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.name-verify-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.teacher-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.verify-badge {
+  color: #38BDF8;
+  display: inline-flex;
+}
+
+.teacher-handle {
+  font-size: 0.8rem;
+  color: #A7F3D0;
+  font-weight: 500;
+}
+
+/* Follow / Enroll Button */
+.btn-follow-action {
+  padding: 8px 18px;
+  background: #10B981;
+  color: #040907;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-follow-action:hover {
+  background: #00F59B;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 245, 155, 0.55);
+}
+
+.btn-follow-action:active {
+  transform: translateY(0);
+}
+
+.role-badge-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.role-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #00F59B;
+  background: rgba(0, 245, 155, 0.1);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 245, 155, 0.25);
+}
+
+.dept-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.teacher-bio {
+  color: #CBD5E1;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-bottom: 14px;
 }
 
 .skills-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .skill-pill {
-  padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-sm);
-  font-size: 0.76rem;
-  color: var(--color-text-muted);
+  font-size: 0.74rem;
+  color: #A7B9AF;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.card-bottom {
+/* Metrics Strip (100 Following · 50.2k Followers style) */
+.profile-metrics-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metric-item {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  align-items: center;
+  gap: 2px;
 }
 
-.status-note {
-  font-size: 0.72rem;
-  color: var(--color-text-dim);
-  font-style: italic;
+.metric-item strong {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.metric-item span {
+  font-size: 0.7rem;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .btn-sm {
@@ -341,11 +543,11 @@ const filteredTeachers = computed(() => {
 
   .teachers-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 22px;
   }
 
-  .teacher-card {
-    padding: 20px;
+  .card-inner-body {
+    padding: 20px 18px 16px;
   }
 
   .filter-section {
@@ -383,14 +585,44 @@ const filteredTeachers = computed(() => {
     padding: 80px 0 24px;
   }
 
-  .teacher-card {
-    padding: 18px 16px;
+  .card-banner-cover {
+    height: 135px;
   }
 
-  .avatar-box {
-    width: 50px;
-    height: 50px;
-    font-size: 1rem;
+  .banner-avatar-wrap {
+    width: 75px;
+    height: 75px;
+  }
+
+  .banner-avatar-icon {
+    font-size: 2.3rem;
+  }
+
+  .avatar-crest-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .teacher-name {
+    font-size: 1.05rem;
+  }
+
+  .btn-follow-action {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+  }
+
+  .profile-metrics-strip {
+    padding: 10px;
+  }
+
+  .metric-item strong {
+    font-size: 0.8rem;
+  }
+
+  .metric-item span {
+    font-size: 0.65rem;
   }
 
   .principle-box {

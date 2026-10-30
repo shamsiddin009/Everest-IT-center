@@ -76,52 +76,94 @@ const filteredCourses = computed(() => {
           <article
             v-for="(course, idx) in filteredCourses"
             :key="course.slug"
-            class="course-card glass-surface"
+            class="course-card modern-pill-card"
             data-aos="fade-up"
             :data-aos-delay="(idx % 3) * 100"
           >
-            <div class="card-top">
-              <span class="course-icon">{{ course.icon }}</span>
-              <span class="course-badge" :class="course.badgeType">
-                {{ course.badge }}
-              </span>
-            </div>
+            <!-- Top Visual Banner with Image & Glass Badges -->
+            <div class="card-visual-top">
+              <img
+                :src="course.image"
+                :alt="course.title"
+                class="card-banner-bg"
+                loading="lazy"
+              />
+              <div class="visual-gradient-mask"></div>
 
-            <div class="card-meta">
-              <span class="category-tag">{{ course.categoryName }}</span>
-              <span class="duration-tag">⏱️ {{ course.duration }}</span>
-            </div>
-
-            <h2 class="course-title">
-              <router-link :to="`/courses/${course.slug}`" class="title-link">
-                {{ course.title }}
-              </router-link>
-            </h2>
-
-            <p class="course-overview">{{ course.overview }}</p>
-
-            <ul class="outcomes-preview">
-              <li v-for="(item, idx) in course.outcomes.slice(0, 3)" :key="idx">
-                <span class="check-icon">✓</span> {{ item }}
-              </li>
-            </ul>
-
-            <div class="card-bottom">
-              <div class="price-box">
-                <span class="price-label">Oylik to‘lov</span>
-                <span class="price-value">{{ course.price }}</span>
+              <!-- Overlapping Floating Avatar Circle (like in 2nd image) -->
+              <div class="floating-avatar-circle">
+                <span class="avatar-icon-char">{{ course.icon }}</span>
               </div>
-              <div class="card-actions">
-                <router-link :to="`/courses/${course.slug}`" class="btn btn-secondary btn-sm">
-                  Tafsilotlar
-                </router-link>
+
+              <!-- Top-right Glass Category Chip -->
+              <div class="top-glass-chip">
+                <span class="chip-star">✨</span>
+                <span>{{ course.categoryName }}</span>
+              </div>
+            </div>
+
+            <!-- Card Content Body -->
+            <div class="card-modern-body">
+              <div class="title-bookmark-row">
+                <div class="title-col">
+                  <h2 class="course-title">
+                    <router-link :to="`/courses/${course.slug}`" class="title-link">
+                      {{ course.title }}
+                    </router-link>
+                  </h2>
+                  <span class="course-level-sub">{{ course.level }}</span>
+                </div>
                 <button
-                  class="btn btn-primary btn-sm"
+                  class="bookmark-icon-btn"
                   @click="emit('openEnroll', course.title)"
+                  title="Kursni saqlash yoki yozilish"
+                  aria-label="Saqlash"
                 >
-                  Yozilish
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                  </svg>
                 </button>
               </div>
+
+              <p class="course-overview">{{ course.overview }}</p>
+
+              <!-- 3-Pill Stats Row (★ 5.0 Rating · 🚩 Price · ⏱️ Duration) -->
+              <div class="stats-three-strip">
+                <div class="strip-item">
+                  <div class="strip-header">
+                    <span class="strip-icon gold">★</span>
+                    <strong>5.0</strong>
+                  </div>
+                  <span class="strip-label">Reyting</span>
+                </div>
+
+                <div class="strip-item">
+                  <div class="strip-header">
+                    <span class="strip-icon cyan">💳</span>
+                    <strong>{{ course.price.replace(' so‘m/oy', '') }}</strong>
+                  </div>
+                  <span class="strip-label">Oylik to‘lov</span>
+                </div>
+
+                <div class="strip-item">
+                  <div class="strip-header">
+                    <span class="strip-icon purple">⏱️</span>
+                    <strong>{{ course.duration }}</strong>
+                  </div>
+                  <span class="strip-label">Davomiyligi</span>
+                </div>
+              </div>
+
+              <!-- Full-Width "Get In Touch / Yozilish" CTA Button -->
+              <button
+                class="btn-modern-action"
+                @click="emit('openEnroll', course.title)"
+              >
+                <span>Kursga Yozilish</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
             </div>
           </article>
         </div>
@@ -296,151 +338,256 @@ const filteredCourses = computed(() => {
   gap: 28px;
 }
 
-.course-card {
+/* ═══ Modern Pill Card Style (Inspired by 2nd Image) ═══ */
+.modern-pill-card {
+  background: #081610;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  border-radius: var(--radius-lg);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 20px rgba(16, 185, 129, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease;
+  position: relative;
 }
 
-.course-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(0, 201, 232, 0.35);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+.modern-pill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 245, 155, 0.5);
+  box-shadow: 0 25px 55px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 245, 155, 0.22);
 }
 
-.card-top {
+/* Card Visual Top */
+.card-visual-top {
+  position: relative;
+  height: 160px;
+  width: 100%;
+  overflow: hidden;
+  background: #050F0B;
+}
+
+.card-banner-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modern-pill-card:hover .card-banner-bg {
+  transform: scale(1.08);
+}
+
+.visual-gradient-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 9, 7, 0.15) 0%, rgba(8, 22, 16, 0.95) 100%);
+  pointer-events: none;
+}
+
+/* Overlapping Floating Avatar Circle */
+.floating-avatar-circle {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #10B981;
+  border: 3.5px solid #06110D;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 16px rgba(16, 185, 129, 0.4);
+  z-index: 2;
+  transition: transform 0.3s ease;
 }
 
-.course-icon {
-  font-size: 2.2rem;
+.modern-pill-card:hover .floating-avatar-circle {
+  transform: scale(1.08);
 }
 
-.course-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 4px 10px;
+.avatar-icon-char {
+  font-size: 1.6rem;
+}
+
+/* Top-right Glass Chip */
+.top-glass-chip {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(4, 9, 7, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-full);
-  text-transform: uppercase;
-}
-
-.course-badge.hot {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.course-badge.new {
-  background: rgba(0, 201, 232, 0.15);
-  color: var(--color-accent);
-  border: 1px solid rgba(0, 201, 232, 0.3);
-}
-
-.course-badge.standard {
-  background: rgba(101, 91, 255, 0.15);
-  color: #a5b4fc;
-  border: 1px solid rgba(101, 91, 255, 0.3);
-}
-
-.card-meta {
+  padding: 4px 12px;
   display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  z-index: 2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.chip-star {
+  font-size: 0.85rem;
+}
+
+/* Card Body */
+.card-modern-body {
+  padding: 20px 22px 22px;
+  background: #06110D;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title-bookmark-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  font-size: 0.8rem;
-  color: var(--color-text-dim);
   margin-bottom: 10px;
 }
 
-.category-tag {
-  color: var(--color-accent);
-  font-weight: 500;
+.title-col {
+  flex: 1;
 }
 
 .course-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  line-height: 1.35;
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 4px;
 }
 
 .title-link {
-  color: var(--color-text);
+  color: #FFFFFF;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .title-link:hover {
-  color: var(--color-accent);
+  color: var(--color-green-neon);
+}
+
+.course-level-sub {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.bookmark-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.bookmark-icon-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #00F59B;
+  border-color: rgba(0, 245, 155, 0.4);
+  transform: scale(1.1);
 }
 
 .course-overview {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  color: #CBD5E1;
+  font-size: 0.88rem;
+  line-height: 1.55;
   margin-bottom: 18px;
   flex: 1;
 }
 
-.outcomes-preview {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 14px;
+/* 3-Pill Stats Row (Rating · Price · Duration) */
+.stats-three-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
 }
 
-.outcomes-preview li {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.check-icon {
-  color: #10B981;
-  font-weight: bold;
-}
-
-.card-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.price-box {
+.strip-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
 }
 
-.price-label {
-  font-size: 0.72rem;
-  color: var(--color-text-dim);
-}
-
-.price-value {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.card-actions {
+.strip-header {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 4px;
 }
 
-.btn-sm {
-  padding: 7px 14px;
+.strip-header strong {
   font-size: 0.82rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.strip-icon {
+  font-size: 0.85rem;
+}
+
+.strip-icon.gold { color: #FBBF24; }
+.strip-icon.cyan { color: #38BDF8; }
+.strip-icon.purple { color: #A78BFA; }
+
+.strip-label {
+  font-size: 0.68rem;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+/* Full-Width "Get In Touch / Yozilish" CTA Button */
+.btn-modern-action {
+  width: 100%;
+  padding: 12px 20px;
+  background: #10B981;
+  color: #040907;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.94rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-modern-action:hover {
+  background: #00F59B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 245, 155, 0.65);
+}
+
+.btn-modern-action:active {
+  transform: translateY(0);
 }
 
 /* Empty State */
