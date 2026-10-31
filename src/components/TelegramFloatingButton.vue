@@ -84,7 +84,7 @@ onMounted(() => {
 <style scoped>
 .telegram-floating-wrapper {
   position: fixed;
-  bottom: 28px;
+  bottom: 85px;
   right: 28px;
   z-index: 9999;
   display: flex;
@@ -325,7 +325,7 @@ onMounted(() => {
 
 @media (max-width: 600px) {
   .telegram-floating-wrapper {
-    bottom: 20px;
+    bottom: 80px;
     right: 18px;
   }
   .tg-greeting-bubble {
