@@ -4,7 +4,7 @@ import AboutView from '../views/AboutView.vue';
 import CoursesView from '../views/CoursesView.vue';
 import CourseDetailView from '../views/CourseDetailView.vue';
 import TeachersView from '../views/TeachersView.vue';
-import PricingView from '../views/PricingView.vue';
+import NewsView from '../views/NewsView.vue';
 import ContactView from '../views/ContactView.vue';
 
 const routes = [
@@ -13,7 +13,8 @@ const routes = [
   { path: '/courses', name: 'courses', component: CoursesView, meta: { title: 'Barcha Kurslar' } },
   { path: '/courses/:slug', name: 'course-detail', component: CourseDetailView, meta: { title: 'Kurs tafsilotlari' } },
   { path: '/teachers', name: 'teachers', component: TeachersView, meta: { title: 'O‘qituvchilar' } },
-  { path: '/pricing', name: 'pricing', component: PricingView, meta: { title: 'Narxlar va Paketlar' } },
+  { path: '/news', name: 'news', component: NewsView, meta: { title: 'Yangiliklar' } },
+  { path: '/pricing', redirect: '/news' },
   { path: '/contact', name: 'contact', component: ContactView, meta: { title: 'Bog‘lanish' } },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ];

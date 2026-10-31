@@ -93,7 +93,7 @@ import Sticker from './Sticker.vue';
             <li><router-link to="/courses">Barcha Kurslar</router-link></li>
             <li><router-link to="/about">Biz haqimizda</router-link></li>
             <li><router-link to="/teachers">O‘qituvchilar</router-link></li>
-            <li><router-link to="/pricing">Narxlar va Paketlar</router-link></li>
+            <li><router-link to="/news">Yangiliklar va Voqealar</router-link></li>
             <li><router-link to="/contact">Bog‘lanish</router-link></li>
           </ul>
         </div>

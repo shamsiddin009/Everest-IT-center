@@ -15,7 +15,7 @@ const navItems = [
   { name: 'Kurslar', path: '/courses' },
   { name: 'Biz haqimizda', path: '/about' },
   { name: 'Ustozlar', path: '/teachers' },
-  { name: 'Narxlar', path: '/pricing' },
+  { name: 'Yangiliklar', path: '/news' },
   { name: 'Aloqa', path: '/contact' }
 ];
 
