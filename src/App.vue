@@ -3,6 +3,7 @@ import { ref, provide, onMounted, onUnmounted } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import TelegramFloatingButton from './components/TelegramFloatingButton.vue';
+import AuroraBackground from './components/AuroraBackground.vue';
 
 const isScrolled = ref(false);
 
@@ -20,9 +21,9 @@ const handleScroll = () => {
   }
 };
 
-// Directly open Telegram Bot for all enrollments
+// Directly open Telegram for all enrollments
 const openEnrollModal = (courseName = '') => {
-  window.open('https://t.me/EverestAcademy_bot', '_blank');
+  window.open('https://t.me/Bekorchi_11', '_blank');
 };
 
 // Provide global enrollment trigger to any nested route/view
@@ -39,6 +40,9 @@ onUnmounted(() => {
 
 <template>
   <div class="everest-app">
+    <!-- Ambient Dynamic Aurora & Spotlight Background -->
+    <AuroraBackground />
+
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Asosiy kontentga o‘tish</a>
 
