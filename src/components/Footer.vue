@@ -28,11 +28,11 @@ import Sticker from './Sticker.vue';
 
         <div class="tg-cta-right">
           <a
-            href="https://t.me/EverestAcademy_bot"
+            href="https://t.me/Bekorchi_11"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-telegram-pulse"
-            aria-label="Telegram bot orqali darsga yozilish"
+            aria-label="Telegram orqali bog'lanish"
           >
             <div class="tg-icon-circle">
               <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
@@ -40,8 +40,8 @@ import Sticker from './Sticker.vue';
               </svg>
             </div>
             <div class="btn-tg-text">
-              <span class="btn-tg-label">Telegram Bot orqali Yozilish</span>
-              <span class="btn-tg-handle">@EverestAcademy_bot</span>
+              <span class="btn-tg-label">Telegram orqali Bog‘lanish</span>
+              <span class="btn-tg-handle">@Bekorchi_11</span>
             </div>
             <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -125,8 +125,8 @@ import Sticker from './Sticker.vue';
             </li>
             <li>
               <Sticker name="telegram" size="sm" class="contact-sticker" />
-              <a href="https://t.me/EverestAcademy_bot" target="_blank" rel="noopener noreferrer" class="tg-inline-link">
-                @EverestAcademy_bot (Telegram Bot)
+              <a href="https://t.me/Bekorchi_11" target="_blank" rel="noopener noreferrer" class="tg-inline-link">
+                @Bekorchi_11 (Telegram)
               </a>
             </li>
             <li>

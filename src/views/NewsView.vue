@@ -147,12 +147,12 @@ const closeModal = () => {
           </div>
           <div class="sub-action-col">
             <a
-              href="https://t.me/EverestAcademy_bot"
+              href="https://t.me/Bekorchi_11"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-cyan btn-lg"
             >
-              <span>Telegram Kanalimizga a’zo bo‘lish</span>
+              <span>Telegram orqali bog‘lanish</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -718,3 +718,4 @@ const closeModal = () => {
   }
 }
 </style>
+

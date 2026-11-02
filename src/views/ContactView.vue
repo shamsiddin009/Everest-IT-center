@@ -92,7 +92,7 @@ const handleSubmit = () => {
                   <Sticker name="chat" size="lg" class="info-sticker" />
                   <div class="info-text">
                     <strong>Telegram & Ijtimoiy tarmoqlar</strong>
-                    <p><a href="https://t.me/EverestAcademy_bot" target="_blank" rel="noopener noreferrer" class="tel-link">@EverestAcademy_bot</a></p>
+                    <p><a href="https://t.me/Bekorchi_11" target="_blank" rel="noopener noreferrer" class="tel-link">@Bekorchi_11</a></p>
                   </div>
                 </div>
 

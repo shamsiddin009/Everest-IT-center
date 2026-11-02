@@ -31,19 +31,19 @@ onMounted(() => {
           &times;
         </button>
         <div class="tg-bubble-header">
-          <span class="tg-bubble-badge">Everest Bot</span>
+          <span class="tg-bubble-badge">Everest Aloqa</span>
           <span class="tg-bubble-status">Online 24/7</span>
         </div>
         <p class="tg-bubble-msg">
-          <Sticker name="wave" size="xs" variant="flat" /> Salom! Darslarga navbatsiz <strong>Telegram Bot</strong> orqali yoziling va 1-darsni bepul oling!
+          <Sticker name="wave" size="xs" variant="flat" /> Salom! Darslarga yozilish yoki savollaringiz bo‘lsa, to‘g‘ridan-to‘g‘ri <strong>Telegram orqali</strong> bog‘laning!
         </p>
         <a
-          href="https://t.me/EverestAcademy_bot"
+          href="https://t.me/Bekorchi_11"
           target="_blank"
           rel="noopener noreferrer"
           class="tg-bubble-btn"
         >
-          <span>Botni ochish</span>
+          <span>Telegramda yozish</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -53,11 +53,11 @@ onMounted(() => {
 
     <!-- Main Floating Action Button -->
     <a
-      href="https://t.me/EverestAcademy_bot"
+      href="https://t.me/Bekorchi_11"
       target="_blank"
       rel="noopener noreferrer"
       class="telegram-floating-btn"
-      title="Telegram bot orqali darsga yozilish"
+      title="Telegram orqali bog'lanish"
     >
       <div class="tg-pulse-ring"></div>
       <div class="tg-pulse-ring tg-pulse-ring--delay"></div>
@@ -72,9 +72,9 @@ onMounted(() => {
         <div class="tg-label-box">
           <div class="tg-label-sub">
             <span class="online-indicator"></span>
-            <span>Tezkor qabul</span>
+            <span>Tezkor aloqa</span>
           </div>
-          <span class="tg-label-main">Telegram Bot</span>
+          <span class="tg-label-main">Bog'lanish</span>
         </div>
       </div>
     </a>
