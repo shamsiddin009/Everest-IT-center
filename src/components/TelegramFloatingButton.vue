@@ -1,63 +1,44 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import Sticker from './Sticker.vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const showGreeting = ref(false);
-const isDismissed = ref(false);
+const isExpanded = ref(false);
+const wrapperRef = ref(null);
 
-const dismissGreeting = (e) => {
-  e.stopPropagation();
-  e.preventDefault();
-  isDismissed.value = true;
-  showGreeting.value = false;
+const toggleExpanded = (e) => {
+  if (!isExpanded.value) {
+    // First click / tap: expand labels smoothly
+    e.preventDefault();
+    isExpanded.value = true;
+  }
+  // Second click (when already expanded): allow navigating directly to t.me/Bekorchi_11
+};
+
+const handleDocumentClick = (e) => {
+  if (wrapperRef.value && !wrapperRef.value.contains(e.target)) {
+    isExpanded.value = false;
+  }
 };
 
 onMounted(() => {
-  // Show greeting prompt gently after 2.5 seconds
-  setTimeout(() => {
-    if (!isDismissed.value) {
-      showGreeting.value = true;
-    }
-  }, 2500);
+  document.addEventListener('click', handleDocumentClick);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleDocumentClick);
 });
 </script>
 
 <template>
-  <aside class="telegram-floating-wrapper" aria-label="Telegram Bot bilan bog‘lanish">
-    <!-- Interactive Greeting Tooltip -->
-    <transition name="pop-fade">
-      <div v-if="showGreeting && !isDismissed" class="tg-greeting-bubble">
-        <button class="tg-close-bubble" @click="dismissGreeting" aria-label="Xabarni yopish">
-          &times;
-        </button>
-        <div class="tg-bubble-header">
-          <span class="tg-bubble-badge">Everest Aloqa</span>
-          <span class="tg-bubble-status">Online 24/7</span>
-        </div>
-        <p class="tg-bubble-msg">
-          <Sticker name="wave" size="xs" variant="flat" /> Salom! Darslarga yozilish yoki savollaringiz bo‘lsa, to‘g‘ridan-to‘g‘ri <strong>Telegram orqali</strong> bog‘laning!
-        </p>
-        <a
-          href="https://t.me/Bekorchi_11"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="tg-bubble-btn"
-        >
-          <span>Telegramda yozish</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-    </transition>
-
-    <!-- Main Floating Action Button -->
+  <aside ref="wrapperRef" class="telegram-floating-wrapper" aria-label="Telegram orqali bog‘lanish">
+    <!-- Main Floating Expandable Action Button -->
     <a
       href="https://t.me/Bekorchi_11"
       target="_blank"
       rel="noopener noreferrer"
       class="telegram-floating-btn"
-      title="Telegram orqali bog'lanish"
+      :class="{ 'is-expanded': isExpanded }"
+      :title="isExpanded ? 'Telegramda ochish' : 'Bog\'lanish uchun bosing'"
+      @click="toggleExpanded"
     >
       <div class="tg-pulse-ring"></div>
       <div class="tg-pulse-ring tg-pulse-ring--delay"></div>
@@ -69,12 +50,18 @@ onMounted(() => {
           </svg>
         </div>
 
+        <!-- Smooth Sliding Label Box -->
         <div class="tg-label-box">
           <div class="tg-label-sub">
             <span class="online-indicator"></span>
             <span>Tezkor aloqa</span>
           </div>
-          <span class="tg-label-main">Bog'lanish</span>
+          <div class="tg-label-row">
+            <span class="tg-label-main">Bog'lanish</span>
+            <svg class="tg-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
         </div>
       </div>
     </a>
@@ -90,93 +77,11 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 12px;
   pointer-events: none;
 }
 
 .telegram-floating-wrapper * {
   pointer-events: auto;
-}
-
-/* Greeting Bubble */
-.tg-greeting-bubble {
-  position: relative;
-  width: 270px;
-  background: rgba(10, 26, 20, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  border-radius: 18px;
-  padding: 1.1rem 1.2rem;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(16, 185, 129, 0.2);
-  margin-bottom: 4px;
-}
-
-.tg-close-bubble {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: var(--color-text-dim, #637A71);
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.tg-close-bubble:hover {
-  color: #fff;
-}
-
-.tg-bubble-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.tg-bubble-badge {
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  background: rgba(16, 185, 129, 0.25);
-  color: #34D399;
-  padding: 2px 7px;
-  border-radius: 999px;
-  border: 1px solid rgba(16, 185, 129, 0.4);
-}
-
-.tg-bubble-status {
-  font-size: 0.72rem;
-  color: #6EE7B7;
-  font-weight: 600;
-}
-
-.tg-bubble-msg {
-  font-size: 0.84rem;
-  color: #D1FAE5;
-  line-height: 1.45;
-  margin-bottom: 10px;
-}
-
-.tg-bubble-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-  color: #FFFFFF;
-  text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 999px;
-  transition: all 0.2s;
-}
-
-.tg-bubble-btn:hover {
-  background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
-  transform: translateX(2px);
 }
 
 /* Floating Action Button */
@@ -188,14 +93,14 @@ onMounted(() => {
   outline: none;
   cursor: pointer;
   border-radius: 999px;
+  user-select: none;
 }
 
 .tg-btn-core {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 18px 8px 8px;
+  padding: 6px;
   background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
@@ -203,22 +108,23 @@ onMounted(() => {
     0 10px 25px rgba(0, 0, 0, 0.6),
     0 0 25px rgba(16, 185, 129, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2;
+  overflow: hidden;
 }
 
 .telegram-floating-btn:hover .tg-btn-core {
-  transform: translateY(-3px) scale(1.03);
   background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
   box-shadow:
     0 16px 35px rgba(0, 0, 0, 0.7),
     0 0 35px rgba(0, 245, 155, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .tg-icon-box {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   background: #FFFFFF;
   border-radius: 50%;
   display: flex;
@@ -230,20 +136,44 @@ onMounted(() => {
   transition: transform 0.3s ease;
 }
 
-.telegram-floating-btn:hover .tg-icon-box {
-  transform: rotate(-8deg) scale(1.08);
+.telegram-floating-btn:hover .tg-icon-box,
+.telegram-floating-btn.is-expanded .tg-icon-box {
+  transform: rotate(-10deg) scale(1.06);
   color: #10B981;
 }
 
 .tg-plane-svg {
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   margin-right: 1px;
 }
 
+/* Sliding Label Box: Hidden by default (compact icon circle) */
 .tg-label-box {
   display: flex;
   flex-direction: column;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(10px);
+  padding-left: 0;
+  padding-right: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease,
+              padding 0.35s ease,
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When expanded or hovered on desktop */
+.telegram-floating-btn.is-expanded .tg-label-box,
+.telegram-floating-btn:hover .tg-label-box {
+  max-width: 170px;
+  opacity: 1;
+  transform: translateX(0);
+  padding-left: 10px;
+  padding-right: 14px;
+  pointer-events: auto;
 }
 
 .tg-label-sub {
@@ -266,6 +196,12 @@ onMounted(() => {
   animation: blink 1.5s infinite;
 }
 
+.tg-label-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .tg-label-main {
   font-family: var(--font-heading);
   font-size: 0.94rem;
@@ -274,11 +210,21 @@ onMounted(() => {
   line-height: 1.2;
 }
 
+.tg-arrow-icon {
+  color: #D1FAE5;
+  transition: transform 0.2s ease;
+}
+
+.telegram-floating-btn:hover .tg-arrow-icon {
+  transform: translateX(3px);
+  color: #FFFFFF;
+}
+
 /* Pulsing radar waves behind button */
 .tg-pulse-ring {
   position: absolute;
   top: 50%;
-  left: 30px;
+  left: 29px;
   transform: translate(-50%, -50%);
   width: 52px;
   height: 52px;
@@ -311,39 +257,21 @@ onMounted(() => {
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
-/* Transitions */
-.pop-fade-enter-active,
-.pop-fade-leave-active {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.pop-fade-enter-from,
-.pop-fade-leave-to {
-  opacity: 0;
-  transform: translateY(12px) scale(0.92);
-}
-
 @media (max-width: 600px) {
   .telegram-floating-wrapper {
     bottom: 80px;
-    right: 18px;
-  }
-  .tg-greeting-bubble {
-    width: calc(100vw - 40px);
-    max-width: 290px;
-  }
-  .tg-label-box {
-    display: none;
-  }
-  .tg-btn-core {
-    padding: 6px;
+    right: 16px;
   }
   .tg-icon-box {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+  }
+  .tg-plane-svg {
+    width: 24px;
+    height: 24px;
   }
   .tg-pulse-ring {
-    left: 50%;
+    left: 28px;
   }
 }
 </style>
