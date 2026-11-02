@@ -3,7 +3,7 @@ import { ref, provide, onMounted, onUnmounted } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import TelegramFloatingButton from './components/TelegramFloatingButton.vue';
-import AuroraBackground from './components/AuroraBackground.vue';
+import CyberBackground from './components/CyberBackground.vue';
 
 const isScrolled = ref(false);
 
@@ -40,8 +40,8 @@ onUnmounted(() => {
 
 <template>
   <div class="everest-app">
-    <!-- Ambient Dynamic Aurora & Spotlight Background -->
-    <AuroraBackground />
+    <!-- Cyber Tech Matrix & Constellation Particles Background (Variant B) -->
+    <CyberBackground />
 
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Asosiy kontentga o‘tish</a>
