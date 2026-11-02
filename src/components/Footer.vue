@@ -121,7 +121,7 @@ import Sticker from './Sticker.vue';
             </li>
             <li>
               <Sticker name="phone" size="sm" class="contact-sticker" />
-              <a href="tel:+998712000000">+998 (71) 200-00-00</a>
+              <a href="tel:+998888070920">+998 (88) 807-09-20</a>
             </li>
             <li>
               <Sticker name="telegram" size="sm" class="contact-sticker" />

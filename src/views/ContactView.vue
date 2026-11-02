@@ -84,7 +84,7 @@ const handleSubmit = () => {
                   <Sticker name="phone" size="lg" class="info-sticker" />
                   <div class="info-text">
                     <strong>Telefon</strong>
-                    <p><a href="tel:+998712000000" class="tel-link">+998 (71) 200-00-00 (namuna)</a></p>
+                    <p><a href="tel:+998888070920" class="tel-link">+998 (88) 807-09-20</a></p>
                   </div>
                 </div>
 
